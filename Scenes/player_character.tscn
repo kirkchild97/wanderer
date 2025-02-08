@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://ct5dn3k1fhdnu"]
+
+[ext_resource type="Script" path="res://Scripts/StateScripts/Machines/character_state_machine.gd" id="1_65vwm"]
+[ext_resource type="Script" path="res://Scripts/StateScripts/States/move_state.gd" id="2_fio2v"]
+[ext_resource type="Script" path="res://Scripts/player_input_handler.gd" id="3_mhgks"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cx74k"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fqkpw"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_sgsds"]
+
+[node name="PlayerCharacter" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_cx74k")
+
+[node name="Visual" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_fqkpw")
+
+[node name="CharacterStateMachine" type="Node" parent="."]
+
+[node name="MoveMachine" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("character_body", "player_input")]
+script = ExtResource("1_65vwm")
+character_body = NodePath("../..")
+player_input = NodePath("../../PlayerInputHandler")
+
+[node name="MoveState" type="Node" parent="CharacterStateMachine/MoveMachine"]
+script = ExtResource("2_fio2v")
+speed = 5.0
+acceleration = 100.0
+
+[node name="PlayerInputHandler" type="Node" parent="."]
+script = ExtResource("3_mhgks")
+
+[node name="CameraPivot" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 1.50789, 0)
+shape = SubResource("SphereShape3D_sgsds")
+spring_length = 10.0
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
