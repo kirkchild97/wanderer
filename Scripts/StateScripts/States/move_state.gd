@@ -4,6 +4,10 @@ class_name MoveState
 @export_group("Movement") #Maybe these could be replaced with Resources later on
 @export var speed: float = 1.0
 @export var acceleration: float = 1.0
+@export_group("Camera Settings")
+@export var use_keyboard_rotation := false
+@export var keyboard_rotate_speed := 0.02
+@onready var cam_pivot: SpringArm3D = %CameraPivot
 
 var camera: Camera3D
 var character_body: CharacterBody3D
@@ -26,6 +30,14 @@ func state_process(_delta: float):
 	pass
 
 func state_physics_process(delta: float):
+	handle_character_movement(delta)
+	handle_camera_rotation(delta)
+
+func handle_camera_rotation(delta: float):
+	if use_keyboard_rotation:
+		cam_pivot.rotate_y(input_handler.get_keyboard_cam_rotation_input() * keyboard_rotate_speed)
+
+func handle_character_movement(delta: float):
 	var raw_input = input_handler.get_move_input()
 	var forward := camera.global_basis.z
 	var right := camera.global_basis.x

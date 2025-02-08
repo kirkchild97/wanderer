@@ -11,7 +11,6 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_sgsds"]
 
 [node name="PlayerCharacter" type="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -32,12 +31,14 @@ player_input = NodePath("../../PlayerInputHandler")
 script = ExtResource("2_fio2v")
 speed = 5.0
 acceleration = 100.0
+use_keyboard_rotation = true
 
 [node name="PlayerInputHandler" type="Node" parent="."]
 script = ExtResource("3_mhgks")
 
 [node name="CameraPivot" type="SpringArm3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 1.50789, 0)
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0)
 shape = SubResource("SphereShape3D_sgsds")
 spring_length = 10.0
 
