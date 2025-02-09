@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://ct5dn3k1fhdnu"]
+[gd_scene load_steps=9 format=3 uid="uid://ct5dn3k1fhdnu"]
 
 [ext_resource type="Script" path="res://Scripts/StateScripts/Machines/character_state_machine.gd" id="1_65vwm"]
 [ext_resource type="Script" path="res://Scripts/StateScripts/States/move_state.gd" id="2_fio2v"]
+[ext_resource type="Script" path="res://Scripts/StateScripts/States/tank_based_move_state.gd" id="2_kiu8g"]
 [ext_resource type="Script" path="res://Scripts/player_input_handler.gd" id="3_mhgks"]
+[ext_resource type="Script" path="res://Scripts/camera_controller.gd" id="4_j306x"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cx74k"]
 
@@ -27,19 +29,25 @@ script = ExtResource("1_65vwm")
 character_body = NodePath("../..")
 player_input = NodePath("../../PlayerInputHandler")
 
+[node name="TankBasedMoveState" type="Node" parent="CharacterStateMachine/MoveMachine"]
+script = ExtResource("2_kiu8g")
+speed = 5.0
+
 [node name="MoveState" type="Node" parent="CharacterStateMachine/MoveMachine"]
 script = ExtResource("2_fio2v")
 speed = 5.0
 acceleration = 100.0
-use_keyboard_rotation = true
 
 [node name="PlayerInputHandler" type="Node" parent="."]
 script = ExtResource("3_mhgks")
 
-[node name="CameraPivot" type="SpringArm3D" parent="."]
+[node name="CameraPivot" type="SpringArm3D" parent="." node_paths=PackedStringArray("input_handler")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0)
 shape = SubResource("SphereShape3D_sgsds")
 spring_length = 10.0
+script = ExtResource("4_j306x")
+input_handler = NodePath("../PlayerInputHandler")
+use_keyboard_rotation = true
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]

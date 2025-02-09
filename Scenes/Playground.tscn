@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwcyr10ktl55y"]
+[gd_scene load_steps=5 format=3 uid="uid://bwcyr10ktl55y"]
 
 [ext_resource type="PackedScene" uid="uid://ct5dn3k1fhdnu" path="res://Scenes/player_character.tscn" id="1_21kks"]
+[ext_resource type="PackedScene" uid="uid://dd4pxpmi6c7gs" path="res://Scenes/enemy_character.tscn" id="2_vle6d"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3kqx0"]
 size = Vector3(20, 0.5, 20)
@@ -23,3 +24,11 @@ mesh = SubResource("BoxMesh_ghtuc")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.5, 0.866025, 0, -0.866025, -0.5, 0, 5.10783, 0.247134)
+
+[node name="EnemyCharacter" parent="." instance=ExtResource("2_vle6d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 3)
+
+[node name="EnemyInputHandler" parent="EnemyCharacter" index="0" node_paths=PackedStringArray("player_character")]
+player_character = NodePath("../../PlayerCharacter")
+
+[editable path="EnemyCharacter"]
