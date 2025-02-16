@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://bwcyr10ktl55y"]
+[gd_scene load_steps=6 format=3 uid="uid://bwcyr10ktl55y"]
 
 [ext_resource type="PackedScene" uid="uid://ct5dn3k1fhdnu" path="res://Scenes/player_character.tscn" id="1_21kks"]
 [ext_resource type="PackedScene" uid="uid://dd4pxpmi6c7gs" path="res://Scenes/enemy_character.tscn" id="2_vle6d"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_mel1g"]
+vertices = PackedVector3Array(-9.5, 0.25, -9.5, -9.5, 0.25, 9.5, 9.5, 0.25, 9.5, 9.5, 0.25, -9.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3kqx0"]
 size = Vector3(20, 0.5, 20)
@@ -11,13 +15,16 @@ size = Vector3(20, 0.5, 20)
 
 [node name="Playground" type="Node3D"]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_mel1g")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D"]
 shape = SubResource("BoxShape3D_3kqx0")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D"]
 mesh = SubResource("BoxMesh_ghtuc")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_21kks")]

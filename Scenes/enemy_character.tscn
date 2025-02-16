@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dd4pxpmi6c7gs"]
+[gd_scene load_steps=7 format=3 uid="uid://dd4pxpmi6c7gs"]
 
 [ext_resource type="Script" path="res://Scripts/enemy_input_handler.gd" id="1_cwlty"]
+[ext_resource type="Script" path="res://Scripts/StateScripts/Machines/enemy_state_machine.gd" id="2_cc6mk"]
+[ext_resource type="Script" path="res://Scripts/StateScripts/States/move_state.gd" id="3_qcaav"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cwsww"]
 
@@ -12,8 +14,12 @@ material = SubResource("StandardMaterial3D_4ek4g")
 
 [node name="EnemyCharacter" type="CharacterBody3D"]
 
-[node name="EnemyInputHandler" type="Node" parent="."]
+[node name="EnemyInputHandler" type="Node" parent="." node_paths=PackedStringArray("enemy_character", "agent")]
 script = ExtResource("1_cwlty")
+enemy_character = NodePath("..")
+agent = NodePath("../NavigationAgent3D")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -22,3 +28,13 @@ shape = SubResource("CapsuleShape3D_cwsww")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_jdqb1")
+
+[node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("character_body", "input_handler")]
+script = ExtResource("2_cc6mk")
+character_body = NodePath("..")
+input_handler = NodePath("../EnemyInputHandler")
+
+[node name="MoveState" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("3_qcaav")
+speed = 2.0
+acceleration = 20.0

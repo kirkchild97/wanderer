@@ -1,9 +1,9 @@
 extends StateMachine
-class_name CharacterStateMachine
+class_name EnemyStateMachine
 
 @export_group("MachineResources")
 @export var character_body: CharacterBody3D
-@export var input_handler: PlayerCharacterInputHandler
+@export var input_handler: EnemyCharacterInputHandler
 
 
 func _ready() -> void:
