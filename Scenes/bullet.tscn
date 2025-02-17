@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://w2mpvgcyp6x7"]
+
+[ext_resource type="Script" path="res://Scripts/bullet.gd" id="1_chks7"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qjclk"]
+radius = 0.100097
+height = 0.302692
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vaoll"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.2
+
+[sub_resource type="SphereMesh" id="SphereMesh_xj57s"]
+radius = 0.097
+height = 0.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tbfgy"]
+top_radius = 0.105
+bottom_radius = 0.105
+height = 0.02
+
+[node name="Bullet" type="Area3D"]
+script = ExtResource("1_chks7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -3.88056e-09, -0.0471153)
+shape = SubResource("CapsuleShape3D_qjclk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_vaoll")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0978041, -3.94362e-08)
+mesh = SubResource("SphereMesh_xj57s")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000143468, -0.102789, 3.92184e-08)
+mesh = SubResource("CylinderMesh_tbfgy")

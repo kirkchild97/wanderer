@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ct5dn3k1fhdnu"]
+[gd_scene load_steps=14 format=3 uid="uid://ct5dn3k1fhdnu"]
 
 [ext_resource type="Script" path="res://Scripts/StateScripts/Machines/character_state_machine.gd" id="1_65vwm"]
 [ext_resource type="Script" path="res://Scripts/StateScripts/States/move_state.gd" id="2_fio2v"]
@@ -6,12 +6,14 @@
 [ext_resource type="Script" path="res://Scripts/player_input_handler.gd" id="3_mhgks"]
 [ext_resource type="Script" path="res://Scripts/camera_controller.gd" id="4_j306x"]
 [ext_resource type="Script" path="res://Scripts/direct_aim_turret.gd" id="6_eiugf"]
+[ext_resource type="PackedScene" uid="uid://w2mpvgcyp6x7" path="res://Scenes/bullet.tscn" id="7_u4mw5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cx74k"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_qxrnj"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_fqkpw"]
+height = 1.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sgsds"]
 
@@ -75,11 +77,15 @@ use_keyboard_rotation = true
 unique_name_in_owner = true
 
 [node name="Turret" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.67887, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.80245, 0)
 script = ExtResource("6_eiugf")
+bullet = ExtResource("7_u4mw5")
+
+[node name="BulletPosition" type="Node3D" parent="Turret"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.246674, 0)
 
 [node name="Visual" type="MeshInstance3D" parent="Turret"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.442429, 0)
 mesh = SubResource("CylinderMesh_etein")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Turret/Visual"]
