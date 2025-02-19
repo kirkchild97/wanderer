@@ -36,5 +36,3 @@ input_handler = NodePath("../EnemyInputHandler")
 
 [node name="MoveState" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("3_qcaav")
-speed = 2.0
-acceleration = 20.0

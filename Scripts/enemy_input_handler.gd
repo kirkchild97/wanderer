@@ -1,4 +1,4 @@
-extends Node
+extends PlayerCharacterInputHandler
 class_name EnemyCharacterInputHandler
 
 @export_group("Resources")
@@ -19,3 +19,11 @@ func get_move_input() -> Vector3:
 func get_player_location():
 	if player_character != null:
 		agent.target_position = player_character.global_position
+
+#Because I'm a slave to OOP and want to access intellisense
+func _unhandled_input(event: InputEvent):
+	pass
+func get_keyboard_cam_rotation_input():
+	pass
+func get_mouse_x_movement():
+	pass

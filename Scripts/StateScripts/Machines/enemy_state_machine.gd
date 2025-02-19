@@ -11,9 +11,7 @@ func _ready() -> void:
 
 func feed_child_states_resources():
 	var states = get_children() as Array[State]
+	var resources:= StateMachineResources.new(character_body, input_handler)
 	for state in states:
-		state.feed_resources({
-			"character_body": character_body,
-			"input_handler": input_handler
-		})
+		state.feed_resources(resources)
 	current_state = states[0]

@@ -2,18 +2,20 @@ extends State
 class_name MoveState
 
 @export var is_player: bool = false
-@export_group("Movement") #Maybe these could be replaced with Resources later on
-@export var speed: float = 1.0
-@export var acceleration: float = 1.0
+var speed: float = 1.0
+var acceleration: float = 1.0
 
 var camera: Camera3D
 var character_body: CharacterBody3D
 var input_handler#: PlayerCharacterInputHandler or EnemyCharacterInputHandler
 
-func feed_resources(data):
+func feed_resources(data: StateMachineResources):
 	character_body = data.character_body
 	input_handler = data.input_handler
 	camera = get_viewport().get_camera_3d()
+	if data.character_info != null:
+		speed = data.character_info.speed
+		acceleration = data.character_info.acceleration
 
 func on_state_enter(data = {}):
 	pass

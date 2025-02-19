@@ -4,7 +4,7 @@ class_name State
 # Maybe Godot will allow this?? Not tested yet.
 signal leave_state(new_state: State)
 
-func feed_resources(_resources):
+func feed_resources(_resources: StateMachineResources):
 	pass
 
 func on_state_enter(_data = {}):

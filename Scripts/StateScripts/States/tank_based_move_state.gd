@@ -10,7 +10,7 @@ class_name TankBasedMovementState
 var character_body: CharacterBody3D
 var input_handler: PlayerCharacterInputHandler
 
-func feed_resources(data):
+func feed_resources(data: StateMachineResources):
 	character_body = data.character_body
 	input_handler = data.input_handler
 
