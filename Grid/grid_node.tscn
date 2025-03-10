@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dpjjbscgiala8"]
+
+[ext_resource type="ArrayMesh" uid="uid://r8yrwvdbxpvc" path="res://Assets/32x32x32Box.vox" id="1_nb2ob"]
+[ext_resource type="Script" path="res://Grid/Scripts/grid_node.gd" id="1_ynfer"]
+[ext_resource type="ArrayMesh" uid="uid://c86lk8vyabgwh" path="res://Assets/32x32x32EmptyBoxOutline.vox" id="2_ti0uw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xsojs"]
+size = Vector3(3, 0.500122, 3)
+
+[node name="GridNode" type="Area3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+script = ExtResource("1_ynfer")
+
+[node name="32x32x32Box" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_nb2ob")
+
+[node name="32x32x32EmptyBoxOutline" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_ti0uw")
+
+[node name="SelectCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.246887, 0)
+visible = false
+shape = SubResource("BoxShape3D_xsojs")
